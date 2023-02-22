@@ -27,6 +27,14 @@ https://contest.yandex.ru/contest/45469/problems/5/
 
 """
 
+"""
+строятся столбики с кол-вом каждой букв идущих попорядку
+и прибавляем в ответ 
+
+ответ - минимум из кол-ва букв и следующих по алфафиту
+
+"""
+
 from collections import defaultdict
 
 n = int(input())
@@ -62,9 +70,3 @@ while f:
 
 
 print(c)
-
-4
-3
-1
-0
-1

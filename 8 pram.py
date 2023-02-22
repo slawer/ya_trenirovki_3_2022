@@ -15,6 +15,12 @@ https://contest.yandex.ru/contest/45469/problems/8/
 
 """
 
+"""
+самая простая 
+
+просто найти минимуми и максимумы по осям
+"""
+
 from collections import defaultdict
 
 m = 10**9

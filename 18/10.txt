@@ -1,0 +1,36 @@
+push_front 179
+push_back 8343
+front
+back
+size
+pop_back
+pop_front
+push_back 342
+clear
+back
+front
+pop_back
+pop_front
+push_back 265
+push_back 63456
+size
+pop_back
+size
+front
+back
+size
+pop_front
+size
+back
+front
+size
+pop_back
+front
+back
+size
+pop_front
+back
+front
+size
+exit
+

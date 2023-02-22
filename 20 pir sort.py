@@ -28,39 +28,57 @@ https://contest.yandex.ru/contest/45468/problems/20
 1 3
 """
 
-f = [1, 3, 5, 7, 9]
-s = [2, 4, 6, 8, 0]
 
-f = [int(c) for c in input().split()]
-s = [int(c) for c in input().split()]
+class Node:
 
+    val: int
+    left: 'Node'
+    right: 'Node'
 
-def first_win(p, v):
-    if p == 0:
-        return v == 9
-    if p == 9:
-        return v != 0
-    return p > v
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
 
 
-for i in range(1, 10**6):
-    if not f:
-        print('second', i-1)
-        exit(0)
-    if not s:
-        print('first', i-1)
-        exit(0)
-    kf = f.pop(0)
-    ks = s.pop(0)
-    # print(i)
-    # print(kf, f)
-    # print(ks, s)
-    # print()
-    if first_win(kf, ks):
-        f.append(kf)
-        f.append(ks)
-    else:
-        s.append(kf)
-        s.append(ks)
+def add(root, val):
+    e = Node(val)
 
-print('botva')
+    # сделать просеивание
+
+
+    root.left = e
+    return root
+
+
+def tr(root):
+    s = [root]
+    m = []
+    while s:
+        c = s.pop()
+        if not c:
+            continue
+        m.append(c.val)
+        s.append(c.left)
+        s.append(c.right)
+
+    return m
+
+
+n = int(input())
+l = [int(c) for c in input().split()]
+
+if not l:
+    print([])
+    exit(0)
+
+root = Node(l[0])
+for i in l[1:]:
+    add(root, i)
+
+m = tr(root)
+print(m)
+
+
+
+

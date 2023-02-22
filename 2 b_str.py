@@ -13,28 +13,129 @@ https://contest.yandex.ru/contest/45468/problems/2/
 
 from collections import defaultdict
 
-#k = int(input())
-#s = input()
+#
+'''
 
-k = 2
-s = 'abcaz'
+алфавит не очень большой тут, но он параметр - может быть большим!
+
+пусть строка состоит только из а и б 
+
+
+1. решение через два указателя
+   первый на а второй двигаем вправо 
+   когда встречаем букву б и уменьшаем замену на 1 и когда он 0 то все плохо
+   когда плохо остановились - между указателями нужная строка
+   теперь сдвигаем левый указатель на 1
+   сравниваем строку с максимальным
+   пытаемся сдвинуть правый вправо
+   
+   и так далее
+   
+   два цикла - фор и вайл - но сложность о от н
+   
+   это сделать для каждой отличной буквы
+   
+   общая сложность - размер алфавита * н
+   
+
+2. решение через префиксные суммы и двоичный поиск
+
+сложность о от а*лог н
+
+считаем сколько букв а до этой позиции включительно 
+и ищем поиском до куда можно было взять
+
+
+'''
+# -----------
+# преф и бинсуммы
+'''
+k = 7
+s = 'ubejxxiazk'
+
+m = 0
+tr = set()
+for i, b in enumerate(s):
+    if b not in tr:
+        tr.add(b)
+    else:
+        continue
+    
+    for 
+'''
+
+
+
+# -------------------
+
+#k = 2
+#s = 'abcaz'
+
+#k = 2
+#s = 'abcazkaoehaamn'
+
+#k = 2
+#s = 'aoehaamn'
+
+#k = 2
+#s = 'helto'
+# 3
+
+#print(s)
+
+k = 7
+s = 'ubejxxiazk'
+
+
+k = int(input())
+s = input()
 
 if len(s) <= k:
     print(len(s))
     exit(0)
 
-d = defaultdict(list)
-c = 1
-l = []
-for i in range(1, len(s)):
-    if s[i-1] == s[i]:
-        c += 1
-    else:
-        l.append((s[i-1], c))
-        c = 1
+l = 0
+rr = 0
+# первая отличная буква от первой
+while rr < len(s) - 1 and s[rr] == s[l]:
+    rr += 1
 
-l.append((s[-1], c))
-print(l)
+m = 0
+tr = set()
+for i, b in enumerate(s):
+    if b not in tr:
+        tr.add(b)
+    else:
+        continue
+    l = 0
+    r = rr
+
+    c = k - 1
+    if s[i] != s[l] and s[i] != s[r]:
+        c -= 1
+    while True:
+        while r < len(s)-1:
+            if s[i] == s[r + 1]:
+                r += 1
+            elif c > 0:
+                r += 1
+                c -= 1
+            else:
+                break
+
+           #  print(m, l, r, s[l:r], c)
+        m = max(m, r - l + 1)
+
+        # сдвиг левого указателя на 1
+        if l == r:
+            break
+        if s[l] != s[i]:
+            c += 1
+        l += 1
+
+        #print(m, c, l, r, s[l], s[r], s[i])
+
+print(m)
 
 
 

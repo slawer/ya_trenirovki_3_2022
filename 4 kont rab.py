@@ -33,13 +33,52 @@ https://contest.yandex.ru/contest/45469/problems/4/
 -1
 """
 
-from collections import defaultdict
+"""
+математич задача на формулу
 
-n = int(input())
-k = int(input())
+ограничение на миллиард - значит перебирать не нужно
+
+особенно на интерпрет языке
+
+формула придумывается по делению и остатку на 2
+
+но случай - нужно сесть подальше - расстояние в парах а не в людях
+
+
+"""
+
+
+
+def get_rs(c):
+    c += 1
+    return c // 2, (c % 2) + 1
+
+
+n = int(input())  # количество учеников
+k = int(input())  # количество вариантов заданий
 
 row = int(input())
 seat = int(input())
+
+all_row = n // 2
+if n % 2:
+    all_row += 1
+
+por = (row-1) * 2 + seat
+
+if n < por + k and por - k < 1:
+    print(-1)
+    exit(0)
+
+r1, s1 = get_rs(por + k)
+r2, s2 = get_rs(por - k)
+
+if row - r2 >= r1 - row and n >= por + k:
+    print(r1, s1)
+else:
+    print(r2, s2)
+
+
 
 
 

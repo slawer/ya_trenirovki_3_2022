@@ -65,7 +65,7 @@ bye
 
 
 class Dek:
-    _lim = 102
+    _lim = 105
     f = _lim
     t = _lim
     l = [0 for _ in range(2*(_lim+1))]
@@ -74,7 +74,24 @@ class Dek:
     def __init__(self):
         self.clear()
 
+    def check_front(self):
+        if self.f > 0:
+            return
+        t = [0 for i in range(self._lim)]
+        for i in self.l:
+            t.append(i)
+        self.f += self._lim
+        self.t += self._lim
+        self.l = t
+
+    def check_tail(self):
+        if self.t < len(self.l) - 1:
+            return
+        for i in range(self._lim):
+            self.l.append(0)
+
     def push_front(self, n):
+        self.check_front()
         if not self.is_empty():
             self.f -= 1
         else:
@@ -82,6 +99,7 @@ class Dek:
         self.l[self.f] = n
 
     def push_back(self, n):
+        self.check_tail()
         if not self.is_empty():
             self.t += 1
         else:
@@ -92,36 +110,43 @@ class Dek:
         return self.e
 
     def pop_front(self):
-        if self.is_empty():
+        if self.len() == 0:
             return 'error'
         r = self.l[self.f]
-        self.f += 1
+        if self.len() > 0:
+            self.f += 1
+        self.len()
         return r
 
     def pop_back(self):
-        if self.is_empty():
+        if self.len() == 0:
             return 'error'
         r = self.l[self.t]
-        self.t -= 1
+        if self.len() > 0:
+            self.t -= 1
+        self.len()
         return r
 
     def front(self):
-        if self.is_empty():
+        if self.len() == 0:
             return 'error'
         return self.l[self.f]
 
     def back(self):
-        if self.is_empty():
+        if self.len() == 0:
             return 'error'
         return self.l[self.t]
 
     def len(self):
         if self.is_empty(): return 0
-        return self.t - self.f + 1
+        l = self.t - self.f + 1
+        if l == 0:
+            self.e = False
+        return l
 
     def clear(self):
-        self.f = 100
-        self.t = 100
+        self.f = self._lim
+        self.t = self._lim
         self.e = True
 
 
@@ -166,3 +191,17 @@ for s in l:
         print('ok')
 
 print('bye')
+
+
+"""
+179 8343 
+2
+
+342
+-
+
+265 63456
+2
+
+
+"""
