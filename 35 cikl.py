@@ -66,7 +66,7 @@ def dfs(curr, root):
         if root and root == neib:
             continue
         if nc == 1:
-            #meeted.append(neib)
+            meeted.append(neib)
             return 0
         elif nc == 2:
             continue
@@ -76,8 +76,8 @@ def dfs(curr, root):
             return 0
 
     visited[curr] = 2
-    if curr in meeted:
-        meeted.remove(curr)
+    #if curr in meeted:
+    #    meeted.remove(curr)
     return 1
 
 
@@ -87,13 +87,14 @@ for node in range(1, n+1):
     meeted = []
     if dfs(node, None) == 0:
         print('YES')
-        #print(visited)
-        #print(meeted)
-        meeted = set(meeted)
+
+        if meeted[0] in meeted[1:]:
+            ind = meeted[1:].index(meeted[0])
+            if ind > -1:
+                meeted = meeted[:ind+1]
         print(len(meeted))
         for e in meeted:
             print(e, end=" ")
-        print()
         exit(0)
 
 print('NO')

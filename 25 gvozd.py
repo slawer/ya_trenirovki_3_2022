@@ -30,5 +30,19 @@ n = int(input())
 l = [int(e) for e in input().split()]
 
 l.sort()
-print(l)
-print(l[-1] - l[0])
+
+dp = [0 for _ in range(n+1)]
+dp[1] = l[1] - l[0]
+dp[0] = dp[1]
+for i in range(2, n):
+    dl = l[i] - l[i-1]
+    dp[i] = dl + min(dp[i-2], dp[i-1])
+print(dp[n-1])
+
+print()
+print(dp)
+# 3 4 6 12 13 14
+# 0 1 2  0 1  1
+
+
+
