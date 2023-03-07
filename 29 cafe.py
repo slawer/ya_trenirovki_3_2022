@@ -64,21 +64,53 @@ n = int(input())
 
 l = [int(input()) for _ in range(n)]
 
-dp = [[-1 for _ in range(n)] for _ in range(n)]
+dp = [[m for _ in range(n+1)] for _ in range(n+1)]
 
-dp[0][0] = l[0]
 for i in range(n):
     dp[i][0] = m
 
-for i in range(n):
-    for j in range(n):
+dp[0][0] = 0
+
+for i in range(1, n+1):
+    for j in range(n+1):
+        t = [dp[i-1][j] + l[i-1]]
+        if j > 0 and l[i-1] > 100:
+            t.append(dp[i-1][j-1] + l[i-1])
+
+        if j < n:
+            t.append(dp[i - 1][j + 1])
+
+        dp[i][j] = min(t)
+
+
+mi = m
+ii = -1
+for i in range(n+1):
+    if dp[-1][i] <= mi:
+        mi = dp[-1][i]
+        ii = i
+
+
+k = []
+j = ii
+for i in range(n, 0, -1):
+    if j+1 < n and dp[i-1][j+1] == dp[i][j] and dp[i][j] < m:
+        k.append(i)
+        j = j+1
+    elif dp[i-1][j] + l[i-1] == dp[i][j]:
         pass
+    else:
+        j -= 1
+
+k.sort()
+print(mi)
+print(ii, len(k))
+for e in k:
+    print(e)
 
 
-
-print(dp)
 print()
-for i in range(n):
-    for j in range(m):
-        print('-' if dp[i][j] == -1 else 'x', end=' ')
+for i in range(n+1):
+    for j in range(n+1):
+        print('-' if dp[i][j] >= m else dp[i][j], end=' ')
     print()
